@@ -1,31 +1,12 @@
-function uploadPhoto() {
-  return {
-    status: 200,
-    body: 'photo-profile-1',
-  };
-}
-
-function createUser() {
-  return {
-    firstName: 'Guillaume',
-    lastName: 'Salva',
-  };
-}
-
-function getResponseFromAPI() {
+export default function getResponseFromAPI() {
   return new Promise((resolve, reject) => {
-    const photo = uploadPhoto();
-    const user = createUser();
-    if (photo.status === 200 && user.firstName && user.lastName) {
-      resolve({
-        photo: photo.body,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      });
+    // call an API here and handle the response
+    const response = { status: 200, body: 'Success' };
+
+    if (response.status === 200) {
+      resolve(response);
     } else {
-      reject(new Error('Invalid response from API'));
+      reject(new Error('API Error'));
     }
   });
 }
-
-export { uploadPhoto, createUser, getResponseFromAPI };
