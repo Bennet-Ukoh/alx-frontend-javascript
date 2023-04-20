@@ -7,6 +7,5 @@ export default function handleResponseFromAPI(promise) {
     .catch((error) => {
       console.error(error);
       return new Error();
-    })
-    .finally(() => console.log('API call completed'));
+    });
 }
