@@ -14,36 +14,17 @@ function createUser() {
 
 function getResponseFromAPI() {
   return new Promise((resolve, reject) => {
-    const photoPromise = new Promise((resolve, reject) => {
-      const photo = uploadPhoto();
-      if (photo && photo.status === 200) {
-        resolve(photo.body);
-      } else {
-        reject(new Error('Invalid photo response'));
-      }
-    });
-
-    const userPromise = new Promise((resolve, reject) => {
-      const user = createUser();
-      if (user && user.firstName && user.lastName) {
-        resolve(user);
-      } else {
-        reject(new Error('Invalid user response'));
-      }
-    });
-
-    Promise.all([photoPromise, userPromise])
-      .then((results) => {
-        const [photo, user] = results;
-        resolve({
-          photo,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        });
-      })
-      .catch((error) => {
-        reject(error);
+    const photo = uploadPhoto();
+    const user = createUser();
+    if (photo.status === 200 && user.firstName && user.lastName) {
+      resolve({
+        photo: photo.body,
+        firstName: user.firstName,
+        lastName: user.lastName,
       });
+    } else {
+      reject(new Error('Invalid response from API'));
+    }
   });
 }
 
