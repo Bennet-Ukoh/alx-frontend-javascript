@@ -1,11 +1,11 @@
-function isDirector(employee: DirectorInterface | TeacherInterface): employee is Director {
-  return (employee as Director).workDirectorTasks !== undefined;
-}
+type Subjects = "Math" | "History";
 
-function executeWork(employee: DirectorInterface | TeacherInterface): string {
-  if (isDirector(employee)) {
-    return employee.workDirectorTasks();
+function teachClass(todayClass: Subjects): string {
+  if (todayClass === "Math") {
+    return "Teaching Math";
+  } else if (todayClass === "History") {
+    return "Teaching History";
   } else {
-    return employee.workTeacherTasks();
+    throw new Error("Invalid subject");
   }
 }
